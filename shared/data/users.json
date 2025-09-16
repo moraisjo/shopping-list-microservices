@@ -1,0 +1,16 @@
+[
+  {
+    "id": "50b22e16-1198-4230-8ba2-c12954983c2a",
+    "createdAt": 1758064949083,
+    "updatedAt": 1758065508412,
+    "email": "user1@example.com",
+    "username": "user1",
+    "password": "$2b$10$ESZ/ZSJmxP232EAyva3eI.tNYQdTj5I5zCtwkYD6vXYEuXfdBhKbu",
+    "firstName": "Joao Pedro",
+    "lastName": "Silva",
+    "preferences": {
+      "defaultStore": "",
+      "currency": "USD"
+    }
+  }
+]
