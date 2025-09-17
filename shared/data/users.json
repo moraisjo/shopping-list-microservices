@@ -12,5 +12,19 @@
       "defaultStore": "",
       "currency": "USD"
     }
+  },
+  {
+    "id": "bbed5c2a-6027-480c-aac0-697c81b0576d",
+    "createdAt": 1758068105176,
+    "updatedAt": 1758068105176,
+    "email": "tester@example.com",
+    "username": "tester",
+    "password": "$2b$10$tECYTqqDqqV8/eFCiUXMjePRT.qUrr5vySI1M/okfBYMi4A2BSrwe",
+    "firstName": "Test",
+    "lastName": "",
+    "preferences": {
+      "defaultStore": "",
+      "currency": "BRL"
+    }
   }
 ]

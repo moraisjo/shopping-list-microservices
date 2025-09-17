@@ -24,40 +24,6 @@ function auth(req, res, next) {
   }
 }
 
-// Seed inicial (20 itens) se vazio
-function seedIfEmpty() {
-  if (itemsCol.findAll().length > 0) return;
-  const seed = [
-    // Alimentos
-    { name: 'Arroz Branco', category: 'Alimentos', brand: 'Marca A', unit: 'kg', averagePrice: 6.5, barcode: '789000000001', description: 'Arroz tipo 1', active: true },
-    { name: 'Feijão Carioca', category: 'Alimentos', brand: 'Marca B', unit: 'kg', averagePrice: 8.9, barcode: '789000000002', description: 'Feijão selecionado', active: true },
-    { name: 'Macarrão Espaguete', category: 'Alimentos', brand: 'Marca C', unit: 'un', averagePrice: 4.2, barcode: '789000000003', description: '500g', active: true },
-    { name: 'Óleo de Soja', category: 'Alimentos', brand: 'Marca D', unit: 'litro', averagePrice: 7.1, barcode: '789000000004', description: 'Óleo refinado', active: true },
-    // Limpeza
-    { name: 'Detergente Neutro', category: 'Limpeza', brand: 'Marca E', unit: 'un', averagePrice: 2.5, barcode: '789000000005', description: '500ml', active: true },
-    { name: 'Sabão em Pó', category: 'Limpeza', brand: 'Marca F', unit: 'kg', averagePrice: 18.9, barcode: '789000000006', description: '1kg multiuso', active: true },
-    { name: 'Desinfetante Lavanda', category: 'Limpeza', brand: 'Marca G', unit: 'litro', averagePrice: 6.0, barcode: '789000000007', description: '1L', active: true },
-    { name: 'Esponja Multiuso', category: 'Limpeza', brand: 'Marca H', unit: 'un', averagePrice: 1.9, barcode: '789000000008', description: 'Esponja dupla face', active: true },
-    // Higiene
-    { name: 'Sabonete Neutro', category: 'Higiene', brand: 'Marca I', unit: 'un', averagePrice: 2.2, barcode: '789000000009', description: 'Sabonete 90g', active: true },
-    { name: 'Shampoo Anticaspa', category: 'Higiene', brand: 'Marca J', unit: 'un', averagePrice: 15.5, barcode: '789000000010', description: '200ml', active: true },
-    { name: 'Pasta de Dente', category: 'Higiene', brand: 'Marca K', unit: 'un', averagePrice: 6.3, barcode: '789000000011', description: '90g', active: true },
-    { name: 'Papel Higiênico 12x', category: 'Higiene', brand: 'Marca L', unit: 'un', averagePrice: 19.9, barcode: '789000000012', description: 'Folha dupla', active: true },
-    // Bebidas
-    { name: 'Água Mineral 1.5L', category: 'Bebidas', brand: 'Marca M', unit: 'litro', averagePrice: 3.0, barcode: '789000000013', description: 'Sem gás', active: true },
-    { name: 'Refrigerante Cola 2L', category: 'Bebidas', brand: 'Marca N', unit: 'litro', averagePrice: 9.5, barcode: '789000000014', description: 'PET 2L', active: true },
-    { name: 'Suco de Laranja 1L', category: 'Bebidas', brand: 'Marca O', unit: 'litro', averagePrice: 8.2, barcode: '789000000015', description: 'Integral', active: true },
-    { name: 'Café Torrado e Moído', category: 'Bebidas', brand: 'Marca P', unit: 'kg', averagePrice: 28.5, barcode: '789000000016', description: '500g', active: true },
-    // Padaria
-    { name: 'Pão de Forma', category: 'Padaria', brand: 'Marca Q', unit: 'un', averagePrice: 8.5, barcode: '789000000017', description: '500g', active: true },
-    { name: 'Bolo Simples', category: 'Padaria', brand: 'Marca R', unit: 'un', averagePrice: 12.0, barcode: '789000000018', description: 'Sabor baunilha', active: true },
-    { name: 'Croissant', category: 'Padaria', brand: 'Marca S', unit: 'un', averagePrice: 4.8, barcode: '789000000019', description: 'Manteiga', active: true },
-    { name: 'Pão Francês', category: 'Padaria', brand: 'Marca T', unit: 'kg', averagePrice: 14.0, barcode: '789000000020', description: 'Aprox. 1kg', active: true }
-  ];
-  seed.forEach(i => itemsCol.insert(i));
-}
-seedIfEmpty();
-
 // Health
 app.get('/health', (_req, res) => res.json({ status: 'ok', service: SERVICE_NAME }));
 

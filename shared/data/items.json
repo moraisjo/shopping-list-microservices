@@ -1,0 +1,15 @@
+[
+  {
+    "id": "91ec7635-c6ae-4f95-bf44-540264ccc5a2",
+    "createdAt": 1758069911059,
+    "updatedAt": 1758069911059,
+    "name": "Farinha Integral",
+    "category": "Alimentos",
+    "brand": "Marca X",
+    "unit": "kg",
+    "averagePrice": 7.9,
+    "barcode": "7891234500999",
+    "description": "Pacote 1kg",
+    "active": true
+  }
+]
