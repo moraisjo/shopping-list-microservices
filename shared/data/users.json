@@ -26,5 +26,19 @@
       "defaultStore": "",
       "currency": "BRL"
     }
+  },
+  {
+    "id": "93d4c7fd-a44c-48b7-a00e-f45687c6a1b8",
+    "createdAt": 1758150383552,
+    "updatedAt": 1758150383552,
+    "email": "usuario@teste.com",
+    "username": "usuarioTeste",
+    "password": "$2b$10$xChW9nWEnfGUy0r1gUKJreyCydXCPRpbZcFmq9yOvtwmYg5cR9jhW",
+    "firstName": "Joao",
+    "lastName": "Silva",
+    "preferences": {
+      "defaultStore": "",
+      "currency": "BRL"
+    }
   }
 ]

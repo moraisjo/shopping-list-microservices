@@ -1,0 +1,62 @@
+[
+  {
+    "id": "99041141-9612-49ac-818c-05b636098baa",
+    "createdAt": 1758155683313,
+    "updatedAt": 1758155683313,
+    "userId": "50b22e16-1198-4230-8ba2-c12954983c2a",
+    "name": "Compras do mês",
+    "description": "Lista principal",
+    "status": "active",
+    "items": [],
+    "summary": {
+      "totalItems": 0,
+      "purchasedItems": 0,
+      "estimatedTotal": 0
+    }
+  },
+  {
+    "id": "eec04e8f-cb13-4e07-9106-b6f95d612131",
+    "createdAt": 1758155723855,
+    "updatedAt": 1758155723855,
+    "userId": "50b22e16-1198-4230-8ba2-c12954983c2a",
+    "name": "Compras do mês",
+    "description": "Lista principal",
+    "status": "active",
+    "items": [],
+    "summary": {
+      "totalItems": 0,
+      "purchasedItems": 0,
+      "estimatedTotal": 0
+    }
+  },
+  {
+    "id": "ae538468-e7a7-4842-bbe3-17bb6ac9917b",
+    "createdAt": 1758155930918,
+    "updatedAt": 1758155930918,
+    "userId": "50b22e16-1198-4230-8ba2-c12954983c2a",
+    "name": "Compras do mês",
+    "description": "Lista principal",
+    "status": "active",
+    "items": [],
+    "summary": {
+      "totalItems": 0,
+      "purchasedItems": 0,
+      "estimatedTotal": 0
+    }
+  },
+  {
+    "id": "36b01eec-3bf3-461b-81cc-b1e97e97fb6a",
+    "createdAt": 1758156588468,
+    "updatedAt": 1758156588468,
+    "userId": "50b22e16-1198-4230-8ba2-c12954983c2a",
+    "name": "Compras do mês",
+    "description": "Lista principal",
+    "status": "active",
+    "items": [],
+    "summary": {
+      "totalItems": 0,
+      "purchasedItems": 0,
+      "estimatedTotal": 0
+    }
+  }
+]

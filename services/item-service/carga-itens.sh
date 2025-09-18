@@ -1,0 +1,31 @@
+#!/bin/bash
+
+TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzZDRjN2ZkLWE0NGMtNDhiNy1hMDBlLWY0NTY4N2M2YTFiOCIsImVtYWlsIjoidXN1YXJpb0B0ZXN0ZS5jb20iLCJ1c2VybmFtZSI6InVzdWFyaW9UZXN0ZSIsImlhdCI6MTc1ODE1MDM4MywiZXhwIjoxNzU4MTUzOTgzfQ.YBStzjzIsEh_5bXTpm2nI4IbXtdL8GeOtiBu-FF2bJw"
+URL="http://localhost:3002/items"
+
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Arroz","category":"Alimentos","brand":"Tio João","unit":"kg","averagePrice":20.5,"barcode":"7891234560011","description":"Arroz branco tipo 1","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Feijão Carioca","category":"Alimentos","brand":"Camil","unit":"kg","averagePrice":12.0,"barcode":"7891234560028","description":"Feijão carioca selecionado","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Macarrão Espaguete","category":"Alimentos","brand":"Renata","unit":"kg","averagePrice":7.0,"barcode":"7891234560035","description":"Macarrão espaguete tradicional","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Óleo de Soja","category":"Alimentos","brand":"Liza","unit":"litro","averagePrice":8.0,"barcode":"7891234560042","description":"Óleo de soja refinado","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Açúcar Refinado","category":"Alimentos","brand":"União","unit":"kg","averagePrice":5.5,"barcode":"7891234560059","description":"Açúcar refinado branco","active":true}'
+
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Detergente Líquido","category":"Limpeza","brand":"Ypê","unit":"un","averagePrice":2.5,"barcode":"7891234560066","description":"Detergente para louças","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Sabão em Pó","category":"Limpeza","brand":"Omo","unit":"kg","averagePrice":18.0,"barcode":"7891234560073","description":"Sabão em pó para roupas","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Desinfetante","category":"Limpeza","brand":"Veja","unit":"litro","averagePrice":7.0,"barcode":"7891234560080","description":"Desinfetante perfumado","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Esponja Multiuso","category":"Limpeza","brand":"Scotch-Brite","unit":"un","averagePrice":1.5,"barcode":"7891234560097","description":"Esponja para limpeza geral","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Água Sanitária","category":"Limpeza","brand":"Qboa","unit":"litro","averagePrice":4.0,"barcode":"7891234560103","description":"Água sanitária tradicional","active":true}'
+
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Sabonete","category":"Higiene","brand":"Dove","unit":"un","averagePrice":3.0,"barcode":"7891234560110","description":"Sabonete hidratante","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Shampoo","category":"Higiene","brand":"Pantene","unit":"un","averagePrice":15.0,"barcode":"7891234560127","description":"Shampoo para cabelos normais","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Pasta de Dente","category":"Higiene","brand":"Colgate","unit":"un","averagePrice":4.0,"barcode":"7891234560134","description":"Pasta de dente branqueadora","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Papel Higiênico","category":"Higiene","brand":"Neve","unit":"un","averagePrice":12.0,"barcode":"7891234560141","description":"Papel higiênico folha dupla","active":true}'
+
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Água Mineral","category":"Bebidas","brand":"Minalba","unit":"litro","averagePrice":2.0,"barcode":"7891234560158","description":"Água mineral sem gás","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Refrigerante Cola","category":"Bebidas","brand":"Coca-Cola","unit":"litro","averagePrice":8.0,"barcode":"7891234560165","description":"Refrigerante sabor cola","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Suco de Laranja","category":"Bebidas","brand":"Del Valle","unit":"litro","averagePrice":7.0,"barcode":"7891234560172","description":"Suco de laranja integral","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Cerveja Pilsen","category":"Bebidas","brand":"Skol","unit":"litro","averagePrice":5.0,"barcode":"7891234560189","description":"Cerveja pilsen lata","active":true}'
+
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Pão Francês","category":"Padaria","brand":"Padaria Central","unit":"kg","averagePrice":12.0,"barcode":"7891234560196","description":"Pão francês fresco","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Bolo de Chocolate","category":"Padaria","brand":"Padaria Central","unit":"kg","averagePrice":25.0,"barcode":"7891234560202","description":"Bolo de chocolate caseiro","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Croissant","category":"Padaria","brand":"Padaria Central","unit":"un","averagePrice":4.0,"barcode":"7891234560219","description":"Croissant de manteiga","active":true}'
+curl -X POST $URL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"name":"Pão de Queijo","category":"Padaria","brand":"Padaria Central","unit":"un","averagePrice":2.0,"barcode":"7891234560226","description":"Pão de queijo tradicional","active":true}'
