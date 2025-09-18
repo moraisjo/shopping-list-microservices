@@ -1,0 +1,5 @@
+{
+  "user-service": "http://localhost:3001",
+  "item-service": "http://localhost:3002",
+  "list-service": "http://localhost:3003"
+}
