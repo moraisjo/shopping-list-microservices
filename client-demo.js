@@ -2,7 +2,7 @@
 
 const fetch = (...args) => import('node-fetch').then(m => m.default(...args));
 
-const API = 'http://localhost:4000';
+const API = 'http://localhost:3000';
 
 async function main() {
   // 1. Registro de usuário

@@ -84,5 +84,57 @@
       "purchasedItems": 0,
       "estimatedTotal": 41
     }
+  },
+  {
+    "id": "4565c5d7-c2b7-44d9-98df-8efab0dcf188",
+    "createdAt": 1758303134283,
+    "updatedAt": 1758303134329,
+    "userId": "e803be5d-9b90-4ad2-bff2-0059a896e9c8",
+    "name": "Minha Lista",
+    "description": "Lista demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "357bdde4-63d6-4231-8e46-cfa540f56e94",
+        "itemName": "Arroz",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 20.5,
+        "purchased": false,
+        "notes": "",
+        "addedAt": 1758303134328
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 41
+    }
+  },
+  {
+    "id": "850d18ff-84be-4c1e-a9ce-2eb87452365f",
+    "createdAt": 1758303657769,
+    "updatedAt": 1758303657802,
+    "userId": "e803be5d-9b90-4ad2-bff2-0059a896e9c8",
+    "name": "Minha Lista",
+    "description": "Lista demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "357bdde4-63d6-4231-8e46-cfa540f56e94",
+        "itemName": "Arroz",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 20.5,
+        "purchased": false,
+        "notes": "",
+        "addedAt": 1758303657801
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 41
+    }
   }
 ]

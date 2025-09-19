@@ -9,7 +9,7 @@
           "url": "http://localhost:3001",
           "healthy": true
         },
-        "lastHeartbeat": 1758301464465
+        "lastHeartbeat": 1758304215416
       }
     ],
     "item-service": [
@@ -21,7 +21,7 @@
           "url": "http://localhost:3002",
           "healthy": true
         },
-        "lastHeartbeat": 1758301467404
+        "lastHeartbeat": 1758304220052
       }
     ],
     "list-service": [
@@ -33,7 +33,7 @@
           "url": "http://localhost:3003",
           "healthy": true
         },
-        "lastHeartbeat": 1758301440647
+        "lastHeartbeat": 1758304193090
       }
     ]
   }

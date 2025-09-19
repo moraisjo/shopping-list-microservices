@@ -4,7 +4,7 @@ const path = require('path');
 const registry = require('../shared/serviceRegistry');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // Logs de requisição
 app.use((req, res, next) => {
