@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const registry = require('../shared/serviceRegistry');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -28,8 +29,19 @@ function readRegistry() {
   }
 }
 function getServiceUrl(name) {
+  // 1) Tenta via serviceRegistry (dinâmico)
+  try {
+    const instances = registry.get(name);
+    if (Array.isArray(instances) && instances.length > 0) {
+      const inst = instances[0];
+      if (inst?.meta?.url) return inst.meta.url;
+      if (inst?.host && inst?.port) return `http://${inst.host}:${inst.port}`;
+    }
+  } catch {}
+  // 2) Fallback para services.json estático
   const reg = readRegistry();
-  return reg[name];
+  const v = reg[name];
+  return typeof v === 'string' ? v : v?.url;
 }
 
 // Circuit breaker simples por serviço

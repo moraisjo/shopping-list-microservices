@@ -1,0 +1,40 @@
+{
+  "services": {
+    "user-service": [
+      {
+        "name": "user-service",
+        "host": "localhost",
+        "port": 3001,
+        "meta": {
+          "url": "http://localhost:3001",
+          "healthy": true
+        },
+        "lastHeartbeat": 1758300906063
+      }
+    ],
+    "item-service": [
+      {
+        "name": "item-service",
+        "host": "localhost",
+        "port": 3002,
+        "meta": {
+          "url": "http://localhost:3002",
+          "healthy": true
+        },
+        "lastHeartbeat": 1758300913473
+      }
+    ],
+    "list-service": [
+      {
+        "name": "list-service",
+        "host": "localhost",
+        "port": 3003,
+        "meta": {
+          "url": "http://localhost:3003",
+          "healthy": true
+        },
+        "lastHeartbeat": 1758300926405
+      }
+    ]
+  }
+}

@@ -59,6 +59,16 @@ function heartbeat(name, host, port) {
   return false;
 }
 
+function unregister(name, host, port) {
+  const data = _load();
+  if (!data.services[name]) return false;
+  const before = data.services[name].length;
+  data.services[name] = data.services[name].filter(s => !(s.host === host && s.port === port));
+  if (data.services[name].length === 0) delete data.services[name];
+  _save(data);
+  return data.services[name] ? data.services[name].length < before : before > 0;
+}
+
 function get(name) {
   const data = _load();
   return data.services[name] || [];
@@ -82,10 +92,30 @@ function cleanup(ttlMs = 60_000) {
   _save(data);
 }
 
+function startHeartbeat(name, host, port, url, intervalMs = 30_000) {
+  async function tick() {
+    let healthy = true;
+    try {
+      const _f = globalThis.fetch || (await import('node-fetch').then(m => m.default));
+      const r = await _f(`${url}/health`);
+      healthy = r.ok;
+    } catch {
+      healthy = false;
+    }
+    // Reutiliza register para atualizar meta + heartbeat
+    register(name, host, port, { url, healthy });
+  }
+  tick();
+  const id = setInterval(tick, intervalMs);
+  return id;
+}
+
 module.exports = {
   register,
   heartbeat,
+  unregister,
   get,
   list,
-  cleanup
+  cleanup,
+  startHeartbeat
 };

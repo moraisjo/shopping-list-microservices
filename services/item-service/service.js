@@ -1,13 +1,22 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { JsonCollection } = require('../../shared/JsonDatabase');
+const { register: regService, startHeartbeat, unregister } = require('../../shared/serviceRegistry');
 
 const app = express();
 app.use(express.json());
 
 const SERVICE_NAME = 'item-service';
 const PORT = process.env.PORT || 3002;
+const HOST = process.env.HOST || 'localhost';
+const SELF_URL = process.env.SELF_URL || `http://${HOST}:${PORT}`;
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
+
+// Registro automático e heartbeat
+regService(SERVICE_NAME, HOST, PORT, { url: SELF_URL, healthy: true });
+const _hb = startHeartbeat(SERVICE_NAME, HOST, PORT, SELF_URL, 30_000);
+process.on('SIGINT', () => { try { clearInterval(_hb); unregister(SERVICE_NAME, HOST, PORT); } finally { process.exit(0); } });
+process.on('SIGTERM', () => { try { clearInterval(_hb); unregister(SERVICE_NAME, HOST, PORT); } finally { process.exit(0); } });
 
 const itemsCol = new JsonCollection('items');
 
