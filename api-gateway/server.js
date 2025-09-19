@@ -102,8 +102,9 @@ function proxyHandler(serviceName) {
       const r = await _fetch(targetUrl, { method, headers, body });
       const text = await r.text();
 
-      if (r.ok) recordSuccess(serviceName);
-      else recordFailure(serviceName, `upstream status ${r.status}`);
+      // Considera falha para 5xx apenas (4xx são erros do cliente e não devem abrir o circuito)
+      if (r.status >= 500) recordFailure(serviceName, `upstream status ${r.status}`);
+      else recordSuccess(serviceName);
 
       res.status(r.status);
       const ct = r.headers.get('content-type') || 'application/json';
@@ -187,34 +188,48 @@ app.get('/api/dashboard', async (req, res) => {
     return res.status(503).json({ error: 'Serviços ausentes no registry' });
   }
 
-  // Se não houver token/id, devolve somente contagens globais para simplicidade
   try {
     const fetches = [];
 
     // Items count
     if (!isOpen('item-service')) {
-      fetches.push(_fetch(itemBase + '/items').then(async r => {
-        const arr = r.ok ? await r.json() : []; if (r.ok) recordSuccess('item-service'); else recordFailure('item-service', `status ${r.status}`); return { itemsCount: Array.isArray(arr) ? arr.length : 0 };
-      }).catch(e => { recordFailure('item-service', e.message); return { itemsCount: 0 }; }));
+      fetches.push(_fetch(itemBase + '/items')
+        .then(async r => {
+          const arr = r.ok ? await r.json() : [];
+          if (r.status >= 500) recordFailure('item-service', `status ${r.status}`); else recordSuccess('item-service');
+          return { itemsCount: Array.isArray(arr) ? arr.length : 0 };
+        })
+        .catch(e => { recordFailure('item-service', e.message); return { itemsCount: 0 }; }));
     } else {
       const c = ensureCircuit('item-service');
       fetches.push(Promise.resolve({ itemsCount: 0, itemCircuit: { open: true, retryAfterMs: Math.max(0, c.openUntil - Date.now()) } }));
     }
 
-    // Lists count
-    if (!isOpen('list-service')) {
-      fetches.push(_fetch(listBase + '/lists').then(async r => {
-        const arr = r.ok ? await r.json() : []; if (r.ok) recordSuccess('list-service'); else recordFailure('list-service', `status ${r.status}`); return { listsCount: Array.isArray(arr) ? arr.length : 0 };
-      }).catch(e => { recordFailure('list-service', e.message); return { listsCount: 0 }; }));
-    } else {
+    // Lists count (requer auth). Sem token, devolve 0 sem consultar o serviço
+    if (authHeader && !isOpen('list-service')) {
+      fetches.push(_fetch(listBase + '/lists', { headers: { authorization: authHeader } })
+        .then(async r => {
+          if (r.status === 401 || r.status === 403) { recordSuccess('list-service'); return { listsCount: 0 }; }
+          const arr = r.ok ? await r.json() : [];
+          if (r.status >= 500) recordFailure('list-service', `status ${r.status}`); else recordSuccess('list-service');
+          return { listsCount: Array.isArray(arr) ? arr.length : 0 };
+        })
+        .catch(e => { recordFailure('list-service', e.message); return { listsCount: 0 }; }));
+    } else if (isOpen('list-service')) {
       const c = ensureCircuit('list-service');
       fetches.push(Promise.resolve({ listsCount: 0, listCircuit: { open: true, retryAfterMs: Math.max(0, c.openUntil - Date.now()) } }));
+    } else {
+      fetches.push(Promise.resolve({ listsCount: 0 }));
     }
 
     // User info (se houver token com id)
     if (userId && !isOpen('user-service')) {
       fetches.push(_fetch(`${userBase}/users/${encodeURIComponent(userId)}`, { headers: { authorization: authHeader } })
-        .then(async r => { const data = await r.json().catch(() => null); if (r.ok) recordSuccess('user-service'); else recordFailure('user-service', `status ${r.status}`); return { user: data, userStatus: r.status }; })
+        .then(async r => {
+          const data = await r.json().catch(() => null);
+          if (r.status >= 500) recordFailure('user-service', `status ${r.status}`); else recordSuccess('user-service');
+          return { user: data, userStatus: r.status };
+        })
         .catch(e => { recordFailure('user-service', e.message); return { user: null }; }));
     } else if (isOpen('user-service')) {
       const c = ensureCircuit('user-service');
@@ -244,6 +259,7 @@ app.get('/api/search', async (req, res) => {
   const REG = readRegistry();
   const itemBase = REG['item-service'];
   const listBase = REG['list-service'];
+  const authHeader = req.headers['authorization'] || '';
   if (!itemBase || !listBase) return res.status(503).json({ error: 'Serviços ausentes no registry' });
 
   try {
@@ -251,17 +267,26 @@ app.get('/api/search', async (req, res) => {
     // Items: usa endpoint próprio de search do item-service
     if (!isOpen('item-service')) {
       promises.push(_fetch(`${itemBase}/search?q=${encodeURIComponent(q)}`)
-        .then(async r => { const data = r.ok ? await r.json() : []; if (r.ok) recordSuccess('item-service'); else recordFailure('item-service', `status ${r.status}`); return { items: Array.isArray(data) ? data : [] }; })
+        .then(async r => { const data = r.ok ? await r.json() : []; if (r.status >= 500) recordFailure('item-service', `status ${r.status}`); else recordSuccess('item-service'); return { items: Array.isArray(data) ? data : [] }; })
         .catch(e => { recordFailure('item-service', e.message); return { items: [] }; }));
     } else {
       promises.push(Promise.resolve({ items: [] }));
     }
 
-    // Lists: não tem /search; puxa todas e filtra por nome
-    if (!isOpen('list-service')) {
-      promises.push(_fetch(`${listBase}/lists`)
-        .then(async r => { const data = r.ok ? await r.json() : []; if (r.ok) recordSuccess('list-service'); else recordFailure('list-service', `status ${r.status}`); const term = q.toLowerCase(); const lists = Array.isArray(data) ? data.filter(l => String(l.name || '').toLowerCase().includes(term)) : []; return { lists }; })
+    // Lists: requer auth; puxa todas e filtra por nome
+    if (authHeader && !isOpen('list-service')) {
+      promises.push(_fetch(`${listBase}/lists`, { headers: { authorization: authHeader } })
+        .then(async r => {
+          if (r.status === 401 || r.status === 403) { recordSuccess('list-service'); return { lists: [] }; }
+          const data = r.ok ? await r.json() : [];
+          if (r.status >= 500) recordFailure('list-service', `status ${r.status}`); else recordSuccess('list-service');
+          const term = q.toLowerCase();
+          const lists = Array.isArray(data) ? data.filter(l => String(l.name || '').toLowerCase().includes(term)) : [];
+          return { lists };
+        })
         .catch(e => { recordFailure('list-service', e.message); return { lists: [] }; }));
+    } else if (isOpen('list-service')) {
+      promises.push(Promise.resolve({ lists: [] }));
     } else {
       promises.push(Promise.resolve({ lists: [] }));
     }
