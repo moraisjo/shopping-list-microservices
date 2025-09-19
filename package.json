@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/moraisjo/shopping-list-microservices/issues"
   },
-  "homepage": "https://github.com/moraisjo/shopping-list-microservices#readme"
+  "homepage": "https://github.com/moraisjo/shopping-list-microservices#readme",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
 }

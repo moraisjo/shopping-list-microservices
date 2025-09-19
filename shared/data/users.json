@@ -54,5 +54,19 @@
       "defaultStore": "",
       "currency": "BRL"
     }
+  },
+  {
+    "id": "e803be5d-9b90-4ad2-bff2-0059a896e9c8",
+    "createdAt": 1758301417522,
+    "updatedAt": 1758301417522,
+    "email": "demo@demo.com",
+    "username": "demouser",
+    "password": "$2b$10$Oo2roXAvy59cmMv4e3f.iuVS3r.LD0PYCI6ef84fvVEFKS.Rta9l.",
+    "firstName": "Demo",
+    "lastName": "User",
+    "preferences": {
+      "defaultStore": "",
+      "currency": "BRL"
+    }
   }
 ]

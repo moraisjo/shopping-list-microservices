@@ -75,3 +75,5 @@ async function main() {
   const dashboard = await dashRes.json();
   console.log('Dashboard:', dashboard);
 }
+
+main().catch(console.error);

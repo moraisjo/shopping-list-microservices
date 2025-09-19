@@ -58,5 +58,31 @@
       "purchasedItems": 0,
       "estimatedTotal": 0
     }
+  },
+  {
+    "id": "a73ddf01-0596-4f73-9f41-9b0e56f89404",
+    "createdAt": 1758301417756,
+    "updatedAt": 1758301417794,
+    "userId": "e803be5d-9b90-4ad2-bff2-0059a896e9c8",
+    "name": "Minha Lista",
+    "description": "Lista demo",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "357bdde4-63d6-4231-8e46-cfa540f56e94",
+        "itemName": "Arroz",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 20.5,
+        "purchased": false,
+        "notes": "",
+        "addedAt": 1758301417794
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 41
+    }
   }
 ]
